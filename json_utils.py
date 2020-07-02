@@ -2,7 +2,16 @@ import json
 import glob
 import os
 
-def dump_json_to_file(data: dict, folder_name: str, file_name: str, **kwargs):
+def dump_json_to_file(data: dict, folder_name: str = ".", file_name: str = "data.json", **kwargs):
+    """
+    Produces a formatted .json file from a dictionary at a given path.
+
+    @args:
+        - data: the `dict` of data to save as a .json formatted file
+        - folder_name (optional): either `full path` or `relative` path
+                       of the folder to save the file in (default: current directory)
+        - file_name (optional): the name of new .json file (default: `data.json`)
+    """
     if not os.path.isdir(folder_name):
         raise ValueError(f"`{folder_name}` is not a valid directory!")
     file_path = os.path.join(folder_name, file_name)
