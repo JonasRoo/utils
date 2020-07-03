@@ -36,7 +36,12 @@ def merge_all_json_in_folder(dir_name: str, merged_file_name: str = "merged_data
     json_wildcard_path = os.path.join(dir_name, "*.json")
     for f in glob.glob(json_wildcard_path):
         with open(f, "r", encoding="utf-8") as input_file:
-            data.append(json.load(input_file))
+            file_data = json.load(input_file)
+            if isinstance(file_data, list):
+                for json_object in file_data:
+                    data.append(json_object)
+            else:
+                data.append(file_data)
 
     results_file_path = os.path.join(dir_name, merged_file_name)
     with open(results_file_path, "w", encoding="utf-8") as output_file:
